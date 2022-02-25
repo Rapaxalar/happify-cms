@@ -46,6 +46,17 @@ const fields = [
   'og_image_id',
 ]
 
+const randomOptions = (field) => {
+  const result = []
+  for (let i = 1; i < Math.floor(Math.random()*5+3); i++) {
+    result.push({
+      label: `Label of ${field} option ${i}`,
+      value: `opt${i}`,
+    })
+  }
+  return result;
+}
+
 const randomInput = (field, id) => {
   return [
     {
@@ -73,40 +84,14 @@ const randomInput = (field, id) => {
       type: 'radio',
       label: `Label of ${field}`,
       value: 'opt1',
-      options: [
-        {
-          label: `Label of ${field} option 1`,
-          value: 'opt1',
-        },
-        {
-          label: `Label of ${field} option 2`,
-          value: 'opt2',
-        },
-        {
-          label: `Label of ${field} option 3`,
-          value: 'opt3',
-        },
-      ]
+      options: randomOptions(field),
     },
     {
       id: field,
       type: 'select',
       label: `Label of ${field}`,
       value: 'opt1',
-      options: [
-        {
-          label: `Label of ${field} option 1`,
-          value: 'opt1',
-        },
-        {
-          label: `Label of ${field} option 2`,
-          value: 'opt2',
-        },
-        {
-          label: `Label of ${field} option 3`,
-          value: 'opt3',
-        },
-      ]
+      options: randomOptions(field),
     }
   ][Math.floor(Math.random()*5)]
 }

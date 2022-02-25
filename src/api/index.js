@@ -87,8 +87,28 @@ const randomInput = (field, id) => {
           value: 'opt3',
         },
       ]
+    },
+    {
+      id: field,
+      type: 'select',
+      label: `Label of ${field}`,
+      value: 'opt1',
+      options: [
+        {
+          label: `Label of ${field} option 1`,
+          value: 'opt1',
+        },
+        {
+          label: `Label of ${field} option 2`,
+          value: 'opt2',
+        },
+        {
+          label: `Label of ${field} option 3`,
+          value: 'opt3',
+        },
+      ]
     }
-  ][Math.floor(Math.random()*4)]
+  ][Math.floor(Math.random()*5)]
 }
 
 export const getHappifier = ({id}) => {

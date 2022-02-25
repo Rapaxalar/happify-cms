@@ -46,15 +46,54 @@ const fields = [
   'og_image_id',
 ]
 
+const randomInput = (field, id) => {
+  return [
+    {
+      id: field,
+      type: 'text',
+      label: `Label of ${field}`,
+      value: `Value of ${field} ${id}`,
+      placeholder: `Placeholder of ${field}`,
+      multiline: Boolean(Math.round(Math.random())),
+    },
+    {
+      id: field,
+      type: 'switch',
+      label: `Label of ${field}`,
+      value: Boolean(Math.round(Math.random())),
+    },
+    {
+      id: field,
+      type: 'checkbox',
+      label: `Label of ${field}`,
+      value: Boolean(Math.round(Math.random())),
+    },
+    {
+      id: field,
+      type: 'radio',
+      label: `Label of ${field}`,
+      value: 'opt1',
+      options: [
+        {
+          label: `Label of ${field} option 1`,
+          value: 'opt1',
+        },
+        {
+          label: `Label of ${field} option 2`,
+          value: 'opt2',
+        },
+        {
+          label: `Label of ${field} option 3`,
+          value: 'opt3',
+        },
+      ]
+    }
+  ][Math.floor(Math.random()*4)]
+}
+
 export const getHappifier = ({id}) => {
   return fields.map(field => {
-    return {
-      id: field,
-      type: 'string',
-      title: `Title of ${field}`,
-      value: `Value of ${field} ${id}`,
-      placeholder: `Placeholder of ${field}`
-    }
+    return randomInput(field, id)
   })
 }
 

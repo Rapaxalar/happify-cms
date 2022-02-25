@@ -18,6 +18,8 @@ body {
 
 table {
   border-collapse: collapse;
+  width: 100%;
+  text-align: left;
 }
 td, th {
   padding: 0.5em;

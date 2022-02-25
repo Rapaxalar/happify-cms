@@ -1,0 +1,1 @@
+export {HappifierTable} from './HappifierTable'

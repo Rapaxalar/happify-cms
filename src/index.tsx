@@ -1,11 +1,49 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+// third party
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+// project imports
+import App from 'App';
+import { BASE_PATH } from 'config';
+import { store, persister } from 'store';
+import * as serviceWorker from 'serviceWorker';
+import reportWebVitals from 'reportWebVitals';
+import { ConfigProvider } from 'contexts/ConfigContext';
+
+// style + assets
+import 'assets/scss/style.scss';
+
+const client = new ApolloClient({
+    uri: 'http://localhost:5007/graphql',
+    cache: new InMemoryCache()
+});
+// ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <ApolloProvider client={client}>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persister}>
+                <ConfigProvider>
+                    <BrowserRouter basename={BASE_PATH}>
+                        <App />
+                    </BrowserRouter>
+                </ConfigProvider>
+            </PersistGate>
+        </Provider>
+    </ApolloProvider>,
+    document.getElementById('root')
 );
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
